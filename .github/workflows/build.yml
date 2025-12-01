@@ -22,13 +22,13 @@ jobs:
         shell: bash
         run: |
           . "$IDF_PATH/export.sh"
-          idf.py --non-interactive -DSDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.ci.rcp_usb" set-target "${{ matrix.target }}"
+          idf.py -DSDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.ci.rcp_usb" set-target "${{ matrix.target }}"
 
       - name: Build (${{ matrix.target }})
         shell: bash
         run: |
           . "$IDF_PATH/export.sh"
-          idf.py --non-interactive build
+          idf.py build
 
       - name: Tool versions
         if: always()
