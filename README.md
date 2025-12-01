@@ -1,5 +1,7 @@
 # ESP OpenThread RCP with RGB Status
 
+![Build](https://github.com/umair-uas/esp-openthread-rcp-rgb/actions/workflows/build.yml/badge.svg?branch=main)
+
 Standalone ESP‑IDF project based on the OpenThread `ot_rcp` example, extended with an addressable RGB (WS2812/NeoPixel) status LED to show RCP lifecycle states.
 
 - Booting: quick cyan blink
@@ -41,4 +43,4 @@ sudo otbr-agent -I wpan0 -B wlan0 \
 ```
 
 ## License
-This project includes files from Espressif examples that are CC0/Public Domain as marked. Please choose and add a license file for this repository before publishing.
+This project includes files from Espressif examples that are CC0/Public Domain as marked. Add a license (MIT/Apache‑2.0 recommended) to this repo to clarify terms.
