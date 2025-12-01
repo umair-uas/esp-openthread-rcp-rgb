@@ -3,10 +3,12 @@ name: Build RCP (H2, C6)
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: espressif/idf:release-v6.0
     strategy:
       fail-fast: false
       matrix:
@@ -16,21 +18,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup ESP-IDF
-        uses: espressif/setup-esp-idf@v1
-        with:
-          version: v6.0
-          cache: true
-
       - name: Configure (${{ matrix.target }})
         shell: bash
         run: |
+          . "$IDF_PATH/export.sh"
           idf.py --non-interactive -DSDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.ci.rcp_usb" set-target "${{ matrix.target }}"
 
       - name: Build (${{ matrix.target }})
         shell: bash
         run: |
+          . "$IDF_PATH/export.sh"
           idf.py --non-interactive build
+
+      - name: Tool versions
+        if: always()
+        shell: bash
+        run: |
+          . "$IDF_PATH/export.sh" || true
+          idf.py --version || true
+          python3 --version || true
+          cmake --version || true
 
       - name: Upload artifacts (${{ matrix.target }})
         uses: actions/upload-artifact@v4
