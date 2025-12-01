@@ -42,6 +42,9 @@ sudo otbr-agent -I wpan0 -B wlan0 \
   spinel+hdlc+uart:///dev/ttyACM0?uart-baudrate=460800 -v
 ```
 
+## Disclaimer
+- Personal project: provided as-is, with no support or guarantees.
+
 ## License
 - License: Apache-2.0 — see `LICENSE` in the repository root.
 - Notes:

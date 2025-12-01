@@ -56,13 +56,25 @@ jobs:
         run: |
           ls -R artifacts
 
+      - name: Prepare release assets (unique names)
+        run: |
+          set -euo pipefail
+          # Copy and rename per-target files to unique names at artifacts root
+          for t in esp32h2 esp32c6; do
+            src_dir="artifacts/rcp-$t"
+            [ -d "$src_dir" ] || { echo "Missing artifact dir: $src_dir"; exit 1; }
+            cp "$src_dir/esp_ot_rcp_rgb.bin" "artifacts/esp_ot_rcp_rgb-$t.bin"
+            cp "$src_dir/bootloader/bootloader.bin" "artifacts/bootloader-$t.bin"
+            cp "$src_dir/partition_table/partition-table.bin" "artifacts/partition-table-$t.bin"
+          done
+          ls -l artifacts
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/**/esp_ot_rcp_rgb.bin
-            artifacts/**/bootloader.bin
-            artifacts/**/partition-table.bin
+            artifacts/esp_ot_rcp_rgb-*.bin
+            artifacts/bootloader-*.bin
+            artifacts/partition-table-*.bin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
