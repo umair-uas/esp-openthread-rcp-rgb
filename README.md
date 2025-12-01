@@ -43,4 +43,7 @@ sudo otbr-agent -I wpan0 -B wlan0 \
 ```
 
 ## License
-This project includes files from Espressif examples that are CC0/Public Domain as marked. Add a license (MIT/Apache‑2.0 recommended) to this repo to clarify terms.
+- License: Apache-2.0 — see `LICENSE` in the repository root.
+- Notes:
+  - Some files originate from Espressif examples and include CC0 headers; those notices are preserved.
+  - Third-party managed components (e.g., `espressif/led_strip`) retain their own licenses (see `managed_components/espressif__led_strip/LICENSE`).
